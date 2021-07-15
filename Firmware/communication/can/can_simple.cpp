@@ -8,6 +8,8 @@ bool CANSimple::init() {
         if (!renew_subscription(i)) {
             return false;
         }
+
+        axes_last_update[i] = 0;
     }
 
     return true;
@@ -101,6 +103,7 @@ void CANSimple::do_command(Axis& axis, const can_Message_t& msg) {
             break;
         case MSG_SET_INPUT_VEL:
             set_input_vel_callback(axis, msg);
+            axes_last_update[axis.axis_num_] = HAL_GetTick();
             break;
         case MSG_SET_INPUT_TORQUE:
             set_input_torque_callback(axis, msg);

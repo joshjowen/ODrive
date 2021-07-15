@@ -285,7 +285,7 @@ void system_init() {
     // Ensure that the board version for which this firmware is compiled matches
     // the board we're running on.
     if (!check_board_version(otp_ptr)) {
-        for (;;);
+        // for (;;);
     }
 }
 

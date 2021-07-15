@@ -40,6 +40,8 @@ class CANSimple {
     bool init();
     uint32_t service_stack();
 
+    uint32_t axes_last_update[AXIS_COUNT];
+
    private:
 
     bool renew_subscription(size_t i);

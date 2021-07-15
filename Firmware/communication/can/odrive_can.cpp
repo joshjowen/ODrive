@@ -70,6 +70,16 @@ void ODriveCAN::can_server_thread() {
             if (status == HAL_OK)
                 status = HAL_CAN_ActivateNotification(handle_, CAN_IT_RX_FIFO0_MSG_PENDING | CAN_IT_TX_MAILBOX_EMPTY);
         }
+
+        uint32_t now = HAL_GetTick();
+
+        for (int i = 0; i < AXIS_COUNT; ++i ) {
+            if (can_simple_.axes_last_update[i] != 0 && now - can_simple_.axes_last_update[i] > 200)
+            {
+                axes[i].controller_.input_vel_ = 0;
+                axes[i].controller_.input_torque_ = 0;
+            }
+        }
     }
 }
 
