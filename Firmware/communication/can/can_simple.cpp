@@ -358,7 +358,7 @@ uint32_t CANSimple::service_stack() {
 
             if (a.config_.can.encoder_rate_ms > 0) {
                 if ((now - a.can_.last_encoder) >= a.config_.can.encoder_rate_ms) {
-                    if (get_encoder_estimates_callback(a))
+                    if (get_encoder_count_callback(a))
                         a.can_.last_encoder = now;
                 }
 
